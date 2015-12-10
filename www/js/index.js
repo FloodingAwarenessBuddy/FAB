@@ -16,10 +16,11 @@ function getFabStatus() {
 	var fabId = 1;
 	var url = "http://project.cmi.hr.nl/2015_2016/mtnll_mt2b_t1/api/sensor.php?sensor=" + fabId + "&callback=?";
 	$.ajax({
-		type: 'GET',
+		//type: 'GET',
 		url: url,
 		async: false,
 		jsonpCallback: 'jsonCallback',
+		jsonp: 'jsoncallback',
 		contentType: "application/json",
 		dataType: 'jsonp',
 		success: function(json) {
@@ -41,7 +42,7 @@ function showSensorWarning(data)
 			"id": 'sensorStatusIcon'
 		})
 		var sensorWarningDescription = $('<span/>', {
-			"text": 'Er is geen internetverbinding beschikbaar.',
+			"text": 'Er is geen werkende internetverbinding beschikbaar.',
 			"id": 'sensorStatusDescription'
 		})
 	}
