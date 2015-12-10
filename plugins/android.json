@@ -18,6 +18,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.putjesproject.FAB"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.putjesproject.FAB"
         }
     },
     "dependent_plugins": {}

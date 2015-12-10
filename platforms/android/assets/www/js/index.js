@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$( document ).ready(function() {
 	init();
 });
 
@@ -10,6 +10,8 @@ var loading = $('<div />', {
 
 function init () {
 	getFabStatus();
+	console.log(navigator.notification);
+	console.log("1");
 };
 
 function getFabStatus() {
@@ -36,7 +38,7 @@ function showSensorWarning(data)
 {
 	console.log(data);
 	if (data == "") {
-		var src = "img/sensorStatus/unknown.svg";
+		var src = "img/sensorStatus/unknown.png";
 		var sensorWarning = $('<img />', {
 			"src": src,
 			"id": 'sensorStatusIcon'
@@ -48,22 +50,29 @@ function showSensorWarning(data)
 	}
 
 	else if (data.error == 0) {
-		// var sensorWarning = $('<div />', {
-		// 	"style": 'width: 100%;',
-		// 	"text": 'Sensor ' + data.id + " geeft een waterhoogte aan van " + data.waterlevel + "."
-		// })
-		var src = "img/sensorStatus/" + data.waterlevel + ".svg";
+		var src = "img/sensorStatus/" + data.waterlevel + ".png";
 		var sensorWarning = $('<img />', {
 			"src": src,
 			"id": 'sensorStatusIcon'
 		})
+
+		var text = "";
+		if (data.waterlevel==0) {
+			text = "Geen gevaar";
+		}
+		else if (data.waterlevel == 1) {
+			text = "Gevaar";
+		}
+		else if (data.waterlevel == 2) {
+			text = "Enorm gevaar";
+		}
 		var sensorWarningDescription = $('<span/>', {
-			"text": 'Geen gevaar',
+			"text": text,
 			"id": 'sensorStatusDescription'
 		})
 	}
 	else {
-		var src = "img/sensorStatus/unknown.svg";
+		var src = "img/sensorStatus/unknown.png";
 		var sensorWarning = $('<img />', {
 			"src": src,
 			"id": 'sensorStatusIcon'
@@ -73,11 +82,13 @@ function showSensorWarning(data)
 			"id": 'sensorStatusDescription'
 		})
 	}
-	
+	$("#sensorWarning").empty();
 	$("#sensorWarning").append(sensorWarning);
 	$("#sensorWarning").append(sensorWarningDescription);
 	stopLoadingAnimation();
-	
+	setTimeout(function(){
+		getFabStatus();
+	},10000);
 }
 
 function stopLoadingAnimation()
