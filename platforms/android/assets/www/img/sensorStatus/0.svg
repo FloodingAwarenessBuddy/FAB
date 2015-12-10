@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="60mm" height="62mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 6000 6200"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:#27AE61}
+    .fil1 {fill:#2DCC70}
+    .fil2 {fill:#FEFEFE}
+   ]]>
+  </style>
+ </defs>
+ <g id="Laag_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1589567459248">
+   <circle class="fil0" cx="3000" cy="3200" r="3000"/>
+   <circle class="fil1" cx="3000" cy="3000" r="3000"/>
+   <polygon class="fil0" points="896,3121 1456,2661 2289,3686 4623,1703 5104,2276 2218,4697 "/>
+   <polygon class="fil2" points="896,2921 1456,2461 2289,3486 4623,1503 5104,2076 2218,4497 "/>
+  </g>
+ </g>
+</svg>
