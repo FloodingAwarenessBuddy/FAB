@@ -1,6 +1,12 @@
 $( document ).ready(function() {
-	init();
+	if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+		document.addEventListener("deviceready", init, false);
+	} else {
+		init();
+	}
 });
+
+var previousWaterLevel = 0;
 
 var loading = $('<div />', {
 	"class": 'mdl-progress mdl-js-progress mdl-progress__indeterminate',
@@ -18,7 +24,6 @@ function getFabStatus() {
 	var fabId = 1;
 	var url = "http://project.cmi.hr.nl/2015_2016/mtnll_mt2b_t1/api/sensor.php?sensor=" + fabId + "&callback=?";
 	$.ajax({
-		//type: 'GET',
 		url: url,
 		async: false,
 		jsonpCallback: 'jsonCallback',
@@ -48,23 +53,35 @@ function showSensorWarning(data)
 			"id": 'sensorStatusDescription'
 		})
 	}
-
-	else if (data.error == 0) {
+	else if (data.waterlevel > 2) {
+		var src = "img/sensorStatus/unknown.png";
+		var sensorWarning = $('<img />', {
+			"src": src,
+			"id": 'sensorStatusIcon'
+		})
+		var sensorWarningDescription = $('<span/>', {
+			"text": 'Waterhoogte ophalen mislukt.',
+			"id": 'sensorStatusDescription'
+		})
+	}
+	else if (data.error == 0 && data.waterlevel < 3) {
 		var src = "img/sensorStatus/" + data.waterlevel + ".png";
 		var sensorWarning = $('<img />', {
 			"src": src,
 			"id": 'sensorStatusIcon'
 		})
-
 		var text = "";
 		if (data.waterlevel==0) {
 			text = "Geen gevaar";
+			previousWaterLevel = data.waterlevel;
 		}
 		else if (data.waterlevel == 1) {
 			text = "Gevaar";
+			displayNotification(text, "Het water komt hoger", data.waterlevel);
 		}
 		else if (data.waterlevel == 2) {
 			text = "Enorm gevaar";
+			displayNotification(text, "Het water staat hoog", data.waterlevel);
 		}
 		var sensorWarningDescription = $('<span/>', {
 			"text": text,
@@ -94,5 +111,30 @@ function showSensorWarning(data)
 function stopLoadingAnimation()
 {
 	$( "#pageLoadingBar" ).hide();
-	
+}
+
+function startLoadingAnimation()
+{
+	$( "#pageLoadingBar" ).show();
+}
+
+function displayNotification(title, text, waterlevel) {
+	if (previousWaterLevel != waterlevel) {
+		if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+			navigator.notification.alert(
+				text,  // message
+				alertDismissed,         // callback
+				title,            // title
+				'OK'                  // buttonName
+			);
+			navigator.vibrate([100, 200, 100, 200, 100, 200, 500, 200, 500, 200, 500, 100, 200, 100, 200, 100, 200]);
+		} else {
+			alert(title.toUpperCase() + ": " + text);
+		}
+	}
+	previousWaterLevel = waterlevel;
+}
+
+function alertDismissed() {
+
 }

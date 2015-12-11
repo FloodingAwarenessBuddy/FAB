@@ -204,6 +204,15 @@ module.exports = [
         "merges": [
             "navigator.notification"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-vibration/www/vibration.js",
+        "id": "cordova-plugin-vibration.notification",
+        "pluginId": "cordova-plugin-vibration",
+        "merges": [
+            "navigator.notification",
+            "navigator"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -213,7 +222,8 @@ module.exports.metadata =
     "cordova-plugin-file": "3.0.0",
     "cordova-plugin-file-transfer": "1.4.0",
     "cordova-plugin-whitelist": "1.2.0",
-    "cordova-plugin-dialogs": "1.2.0"
+    "cordova-plugin-dialogs": "1.2.0",
+    "cordova-plugin-vibration": "2.0.0"
 }
 // BOTTOM OF METADATA
 });
